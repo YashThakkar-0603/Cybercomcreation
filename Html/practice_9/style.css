@@ -1,0 +1,15 @@
+ /* Custom styles */
+ .container-box {
+    margin-top: 50px;
+  }
+
+  .container-box h1 {
+    border-bottom: 1px solid #000; /* Adjust color and thickness as needed */
+    width: 100%;
+    padding-bottom: 10px; /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+  }
+  .Gender{
+    width: max-content;
+    color: aqua;
+  }

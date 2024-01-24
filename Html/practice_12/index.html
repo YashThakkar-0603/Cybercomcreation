@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007BFF;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Form Validation</h2>
+    <form onsubmit="return validateForm()">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <div id="firstNameError" class="error-message"></div>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <div id="lastNameError" class="error-message"></div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <div id="emailError" class="error-message"></div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            // Reset error messages
+            clearErrors();
+
+            var isValid = true;
+
+            // Validate first name
+            var firstName = document.getElementById("firstName").value.trim();
+            if (firstName === "") {
+                displayError("firstNameError", "First name is required");
+                isValid = false;
+            }
+
+            // Validate last name
+            var lastName = document.getElementById("lastName").value.trim();
+            if (lastName === "") {
+                displayError("lastNameError", "Last name is required");
+                isValid = false;
+            }
+
+            // Validate email
+            var email = document.getElementById("email").value.trim();
+            if (email === "") {
+                displayError("emailError", "Email is required");
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                displayError("emailError", "Invalid email format");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function displayError(elementId, message) {
+            var errorElement = document.getElementById(elementId);
+            errorElement.innerText = message;
+        }
+
+        function clearErrors() {
+            var errorElements = document.getElementsByClassName("error-message");
+            for (var i = 0; i < errorElements.length; i++) {
+                errorElements[i].innerText = "";
+            }
+        }
+
+        function isValidEmail(email) {
+            // Basic email validation using a regular expression
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+    </script>
+
+</body>
+</html>

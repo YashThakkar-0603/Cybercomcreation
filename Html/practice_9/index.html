@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <!-- Custom CSS -->
+    <style>
+      .form-group {
+          margin-top: 10px;
+      }
+
+      
+      #patientInfoForm {
+          border: 1px solid #ced4da;
+          border-radius: 8px;
+          padding: 20px;
+          margin-top: 3%;
+      }
+
+      
+      h4 {
+          border-bottom: 1px solid #ced4da;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+      }
+      h1 {
+          border-bottom: 1px solid #ced4da;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+          margin-top: 30px;
+      }
+  </style>
+    <title>General Patient Information Form</title>
+  </head>
+  <body>
+  
+  <div class="container container-box animated">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form id="patientInfoForm">
+          <h1 class="mb-4" >General Patient Information</h1>
+          <div class="form-group">
+            <!-- Gender -->
+            <label for="gender">Select Gender <span class="text-danger">*</span></label>
+            <select class="form-control" id="gender" name="gender" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <!-- Pateint name -->
+          <div class="form-group">
+            <label for="fullName">Patient Name<span class="text-danger">*</span></label>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                <label for="firstName" class="small">Firstname</label>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="lastName" name="lastName" required>
+                <label for="lastName" class="small">lastname</label>
+              </div>
+            </div>
+            <!-- pateint birthday -->
+            <label for="fullName">Patient birthDay<span class="text-danger">*</span></label>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <select class="form-control" id="birthMonth" name="birthMonth" required>
+                  <option value="01">January</option>
+                  <option value="02">February</option>
+                  <option value="03">March</option>
+                  <option value="04">April</option>
+                  <option value="05">May</option>
+                  <option value="06">June</option>
+                  <option value="07">July</option>
+                  <option value="08">August</option>
+                  <option value="09">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <label for="birthMonth" class="small">Month</label>
+              </div>
+              <div class="form-group col-md-4">
+                <input type="number" class="form-control" id="birthDay" name="birthDay" min="1" max="31" required>
+                <label for="birthDay" class="small">Day</label>
+              </div>
+              <div class="form-group col-md-4">
+                <input type="number" class="form-control" id="birthYear" name="birthYear" min="1900" max="2024" required>
+                <label for="birthYear" class="small">Year</label>
+              </div>
+            </div>
+            <!-- pteint height -->
+            <div class="form-group">
+              <label for="heightCm">Height (cm's)<span class="text-danger">*</span></label>
+              <input type="number" class="form-control" id="heightCm" name="heightCm" style="width: 50%;" placeholder="ex:176">
+            </div>
+            <!-- pteint Weight -->
+            <div class="form-group">
+              <label for="weight">Pateint Weight(kg's)<span class="text-danger">*</span></label>
+              <input type="number" class="form-control" id="weight" name="Weight" style="width: 50%;" placeholder="ex:50kg">
+            </div>
+            <!-- pteint Email -->
+            <div class="form-group">
+              <label for="email">Pateint E-mail<span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="email" name="E-mail" style="width: 50%;">
+             
+            </div>
+            <!-- Reason for seeing the doctor -->
+            <div class="form-group">
+              <label for="rsf" style="margin-top: 10px;" >Reason for seeing the doctor<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="rsf" name="rsf" style="width: 50%;">
+            </div>
+            <h4 style="margin-top: 50px;">Patient Medical History</h4>
+
+            <div class="form-group">
+              <label for="allergies" style="margin-top: 10px;">Please list any drug allergies</label>
+              <textarea class="form-control" id="allergies" name="allergies" rows="4" ></textarea>
+            </div>
+            
+            <!-- illnesses -->
+
+            <div class="form-group">
+              <label style="margin-top: 10px;">Have you ever had (Please check all that apply)</label>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="anemia" name="medicalCondition" value="Anemia">
+                <label class="form-check-label" for="anemia">Anemia</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="asthma" name="medicalCondition" value="Asthma">
+                <label class="form-check-label" for="asthma">Asthma</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="arthritis" name="medicalCondition" value="Arthritis">
+                <label class="form-check-label" for="arthritis">Arthritis</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="cancer" name="medicalCondition" value="Cancer">
+                <label class="form-check-label" for="cancer">Cancer</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gout" name="medicalCondition" value="Gout">
+                <label class="form-check-label" for="gout">Gout</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="diabetes" name="medicalCondition" value="Diabetes">
+                <label class="form-check-label" for="diabetes">Diabetes</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="emotionalDisorder" name="medicalCondition" value="Emotional Disorder">
+                <label class="form-check-label" for="emotionalDisorder">Emotional Disorder</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="epilepsySeizures" name="medicalCondition" value="Epilepsy Seizures">
+                <label class="form-check-label" for="epilepsySeizures">Epilepsy Seizures</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="faintingSpells" name="medicalCondition" value="Fainting Spells">
+                <label class="form-check-label" for="faintingSpells">Fainting Spells</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gallstones" name="medicalCondition" value="Gallstones">
+                <label class="form-check-label" for="gallstones">Gallstones</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="heartDisease" name="medicalCondition" value="Heart Disease">
+                <label class="form-check-label" for="heartDisease">Heart Disease</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="heartAttack" name="medicalCondition" value="Heart Attack">
+                <label class="form-check-label" for="heartAttack">Heart Attack</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rheumaticFever" name="medicalCondition" value="Rheumatic Fever">
+                <label class="form-check-label" for="rheumaticFever">Rheumatic Fever</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="highBloodPressure" name="medicalCondition" value="High Blood Pressure">
+                <label class="form-check-label" for="highBloodPressure">High Blood Pressure</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="digestiveProblems" name="medicalCondition" value="Digestive Problems">
+                <label class="form-check-label" for="digestiveProblems">Digestive Problems</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="ulcerativeColitis" name="medicalCondition" value="Ulcerative Colitis">
+                <label class="form-check-label" for="ulcerativeColitis">Ulcerative Colitis</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="ulcerDisease" name="medicalCondition" value="Ulcer Disease">
+                <label class="form-check-label" for="ulcerDisease">Ulcer Disease</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="hepatitis" name="medicalCondition" value="Hepatitis">
+                <label class="form-check-label" for="hepatitis">Hepatitis</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="kidneyDisease" name="medicalCondition" value="Kidney Disease">
+                <label class="form-check-label" for="kidneyDisease">Kidney Disease</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="liverDisease" name="medicalCondition" value="Liver Disease">
+                <label class="form-check-label" for="liverDisease">Liver Disease</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="sleepApnea" name="medicalCondition" value="Sleep Apnea">
+                <label class="form-check-label" for="sleepApnea">Sleep Apnea</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="useCPAPMachine" name="medicalCondition" value="Use a C-PAP machine">
+                <label class="form-check-label" for="useCPAPMachine">Use a C-PAP machine</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="thyroidProblems" name="medicalCondition" value="Thyroid Problems">
+                <label class="form-check-label" for="thyroidProblems">Thyroid Problems</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="tuberculosis" name="medicalCondition" value="Tuberculosis">
+                <label class="form-check-label" for="tuberculosis">Tuberculosis</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="venerealDisease" name="medicalCondition" value="Venereal Disease">
+                <label class="form-check-label" for="venerealDisease">Venereal Disease</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="neurologicalDisorders" name="medicalCondition" value="Neurological Disorders">
+                <label class="form-check-label" for="neurologicalDisorders">Neurological Disorders</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="bleedingDisorders" name="medicalCondition" value="Bleeding Disorders">
+                <label class="form-check-label" for="bleedingDisorders">Bleeding Disorders</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="lungDisease" name="medicalCondition" value="Lung Disease">
+                <label class="form-check-label" for="lungDisease">Lung Disease</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="emphysema" name="medicalCondition" value="Emphysema">
+                <label class="form-check-label" for="emphysema">Emphysema</label>
+              </div>
+            
+              <div class="form-group">
+                <label for="rsf" style="margin-top: 10px;" >Other illnesses</label>
+                <input type="text" class="form-control" id="illnesses" name="illnesses" style="width: 50%;">
+              </div>
+            </div>
+            
+            <!-- opration informawtion -->
+
+            <div class="form-group">
+              <label for="allergies" style="margin-top: 10px;">Please list any Operations and Dates of Each</label>
+              <textarea class="form-control" id="allergies" name="allergies" rows="4" ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="allergies" style="margin-top: 10px;">Please list your Current Medications</label>
+              <textarea class="form-control" id="allergies" name="allergies" rows="4" ></textarea>
+            </div>
+
+            <h4 style="margin-top: 60px;">Healthy & Unhealthy Habits</h4>
+
+            <div class="form-group">
+              <label style="margin-top: 10px;">Exercise </label>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="neverExercise" name="exerciseFrequency" value="Never">
+                <label class="form-check-label" for="neverExercise">Never</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="1-2daysExercise" name="exerciseFrequency" value="1-2 days">
+                <label class="form-check-label" for="1-2daysExercise">1-2 days</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">3-4 days</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="5+daysExercise" name="exerciseFrequency" value="5+ days">
+                <label class="form-check-label" for="5+daysExercise">5+ days</label>
+              </div>
+            
+            </div>
+
+
+            <div class="form-group">
+              <label style="margin-top: 10px;">Eating following a diet</label>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="neverExercise" name="exerciseFrequency" value="Never">
+                <label class="form-check-label" for="neverExercise">I have a loose diet</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="1-2daysExercise" name="exerciseFrequency" value="1-2 days">
+                <label class="form-check-label" for="1-2daysExercise">I have strict diet</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">I don't have any diet plane</label>
+              </div>
+            
+             
+            </div>
+
+
+            <div class="form-group">
+              <label style="margin-top: 10px;">Alcohol Consumption</label>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="neverExercise" name="exerciseFrequency" value="Never">
+                <label class="form-check-label" for="neverExercise">I don't drink</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="1-2daysExercise" name="exerciseFrequency" value="1-2 days">
+                <label class="form-check-label" for="1-2daysExercise">1-2 glasses/day</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">3-4 glasses/day</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">5+ glasses/day</label>
+              </div>
+            
+             
+            </div>
+
+
+            <div class="form-group">
+              <label style="margin-top: 10px;">Caffeine Consumption</label>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="neverExercise" name="exerciseFrequency" value="Never">
+                <label class="form-check-label" for="neverExercise">I don't use caffeine</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="1-2daysExercise" name="exerciseFrequency" value="1-2 days">
+                <label class="form-check-label" for="1-2daysExercise">1-2 cups/day</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">3-4 cups/day</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">5+ cups/day</label>
+              </div>
+            
+             
+            </div>
+
+
+            <div class="form-group">
+              <label style="margin-top: 10px;">Do you smoke?</label>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="neverExercise" name="exerciseFrequency" value="Never">
+                <label class="form-check-label" for="neverExercise">No</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="1-2daysExercise" name="exerciseFrequency" value="1-2 days">
+                <label class="form-check-label" for="1-2daysExercise">0-1 pack/day</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">1-2 pack/day</label>
+              </div>
+            
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="3-4daysExercise" name="exerciseFrequency" value="3-4 days">
+                <label class="form-check-label" for="3-4daysExercise">2+ cups/day</label>
+              </div>
+            
+             
+            </div>
+            
+          </div>
+          <div class="form-group">
+            <label for="allergies" style="margin-top: 10px;">Include other comments regarding your Medical History</label>
+            <textarea class="form-control" id="allergies" name="allergies" rows="4" ></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap JS, jQuery, and Bootstrap Datepicker JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+ <!-- jQuery and jQuery Validation Plugin scripts -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    
+    $("#patientInfoForm").validate({
+      rules: {
+        
+        gender: "required",
+        firstName: "required",
+        lastName: "required",
+        birthMonth: "required",
+        birthDay: "required",
+        birthYear: "required",
+        heightCm: "required",
+        weight: "required",
+        email: {
+          required: true,
+          email: true
+        },
+        rsf: "required",
+        
+      },
+      messages: {
+       
+        gender: "Please select a gender",
+        firstName: "Please enter a first name",
+        lastName: "Please enter a last name",
+        birthMonth: "Please select a birth month",
+        birthDay: "Please enter a birth day",
+        birthYear: "Please enter a birth year",
+        heightCm: "Please enter a height",
+        weight: "Please enter a weight",
+        email: {
+          required: "Please enter an email address",
+          email: "Please enter a valid email address"
+        },
+        rsf: "Please enter a reason for seeing the doctor",
+        
+      },
+      errorElement: "span",
+      errorPlacement: function (error, element) {
+       
+        error.addClass("invalid-feedback");
+        element.closest(".form-group").append(error);
+
+       
+        $('html, body').animate({
+          scrollTop: $(".is-invalid").first().offset().top - 100
+        }, 500);
+      },
+      highlight: function (element, errorClass, validClass) {
+        
+        $(element).addClass("is-invalid");
+      },
+      unhighlight: function (element, errorClass, validClass) {
+       
+        $(element).removeClass("is-invalid");
+      }
+    });
+
+   
+    $("#submitBtn").click(function () {
+      if ($("#patientInfoForm").valid()) {
+       
+        alert("Form submitted successfully!");
+      }
+    });
+  });
+</script>
+
+
+  </body>
+  </html>
+  
+
