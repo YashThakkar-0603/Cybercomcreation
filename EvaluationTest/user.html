@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        /* Custom CSS */
+        body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 90%; /* Adjust the max-width as needed */
+            margin-left: 200px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        button.edit, button.delete {
+            background-color: #2196F3;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 4px;
+        }
+
+        button.delete {
+            background-color: #f44336;
+        }
+
+        form {
+            margin-left: 300px;
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            display: inline-block;
+            width: 10%;
+            margin-bottom: 16px;
+            margin-top: 20px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button.update {
+            background-color: #2196F3;
+        }
+
+        .sidebar {
+            border: 2px solid black;
+            
+            padding: 20px;
+            max-width: 200px;
+            margin: auto;
+        
+            background-color: #b45f06;
+            position: fixed;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 20px;
+    }
+
+    li {
+        display: inline-block;
+        margin-right: 10px;
+        margin-top: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px; /* Adjust the font size as needed */
+    }
+
+    </style>
+
+    <title>User Management</title>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <!-- Display logged-in user's name -->
+        <h5>Welcome, <span id="loggedInUserName">admin</span>!</h5>
+        <!-- Navigation links -->
+        <ul>
+            <li><a href="dashbord.html">Dashboard</a></li><br>
+            <li><a href="user.html">Users</a></li>
+            <li><a href="dashboard.html">Login Session</a></li><br>
+            <li><a href="#" id="logoutLink">Logout</a></li>
+        </ul>
+    </div>
+    <form id="userForm" onsubmit="event.preventDefault(); validateAndSubmit()">
+        <h3>Add user</h3>
+        <div class="form-group">
+            <input type="text" placeholder="Name" id="name" required>
+        </div>
+        <div class="form-group">
+            <input type="email" placeholder="Email" id="email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" placeholder="Password" id="password" required>
+        </div>
+        <div class="form-group">
+            <input type="date" placeholder="birthDay" id="birthDay" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitButton">Add User</button>
+    </form>
+    <div class="container">
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Birth Day</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+        function validateAndSubmit() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const birthDay = document.getElementById('birthDay').value;
+
+            if (!validateName(name) || !validateEmail(email) || !validatePassword(password) || !validateBirthDay(birthDay)) {
+                return;
+            }
+
+            const user = {
+                
+                name,
+                email,
+                password,
+                birthDay,
+               
+            };
+
+           
+            const tableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+            const newRow = tableBody.insertRow(tableBody.rows.length);
+            const keys = Object.keys(user);
+
+            keys.forEach((key, index) => {
+                const cell = newRow.insertCell(index);
+                if (key === 'birthDay') {
+                    const date = new Date(user[key]);
+                    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                    cell.textContent = formattedDate;
+                } else {
+                    cell.textContent = user[key];
+                }
+            });
+
+            
+            const actionCell = newRow.insertCell(keys.length);
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.onclick = function () {
+                editUser(newRow);
+            };
+            actionCell.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function () {
+                deleteUser(newRow);
+            };
+            actionCell.appendChild(deleteButton);
+
+            
+            saveUserToLocalstorage(user);
+
+            
+            document.getElementById('userForm').reset();
+        }
+
+        function saveUserToLocalstorage(user) {
+            
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+            
+            existingUsers.push(user);
+
+            
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+        }
+
+              function validateName(name) {
+            if (!name || name.trim() === '') {
+                alert('Please enter a valid name.');
+                return false;
+            }
+            return true;
+        }
+    
+        function validateEmail(email) {
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+            return true;
+        }
+    
+        function validatePassword(password) {
+            if (!password || password.trim() === '') {
+                alert('Please enter a valid password.');
+                return false;
+            }
+            return true;
+        }
+    
+        function validateBirthDay(birthDay) {
+            
+            if (!birthDay) {
+                alert('Please enter a valid birth day.');
+                return false;
+            }
+            return true;
+        }
+    
+        function editUser(row) {
+            
+            const form = document.getElementById('userForm');
+            const cells = row.cells;
+    
+            form.elements['name'].value = cells[0].textContent;
+            form.elements['email'].value = cells[1].textContent;
+            form.elements['password'].value = cells[2].textContent;
+            form.elements['birthDay'].value = cells[3].textContent;
+    
+            
+            row.parentNode.removeChild(row);
+        }
+    
+        function deleteUser(row) {
+            
+            row.parentNode.removeChild(row);
+        }
+       
+ document.getElementById('logoutLink').addEventListener('click', function() {
+       
+        logout();
+    });
+
+    function logout() {
+               window.location.href = 'index.html';
+    }
+
+    </script>
+</body>
+</html>
