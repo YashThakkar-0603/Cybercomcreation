@@ -11,14 +11,16 @@
         <h1>To-Do List</h1>
         <form id="task-form">
             <input type="text" id="task-input" placeholder="Add new task..." required>
+            <input type="text" id="category" placeholder="Add Category..." required> 
             <input type="date" id="due-date" required>
-            <select id="priority">
+            <select id="priority" >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="high"  selected>High</option>
             </select>
           
             <button type="submit">Add Task</button>
+           
         </form>
         <table>
             <thead>
@@ -27,24 +29,14 @@
                     <th>Due Date</th>
                     <th>Remaining Days</th>
                     <th>Priority</th>
-                 
+                    <th>Category</th> 
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="task-list"></tbody>
         </table>
-       
     </div>
     <script src="script.js"></script>
-    <script>
-        function editTask(id) {
-            window.editTask(id);
-        }
-
-        function deleteTask(id) {
-            window.deleteTask(id);
-        }
-    </script>
-    
+   
 </body>
 </html>
