@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+    .appointment-card {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text-center mt-5">Doctor Dashboard</h1>
+  <div class="container">
+    <div id="appointmentList">
+      <!-- Appointment requests will be displayed here -->
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (optional, for certain features like dropdowns, modals, etc.) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Retrieve doctor's information from local storage
+    var loggedInDoctorId = localStorage.getItem('loggedInDoctorId');
+    var loggedInDoctorName = localStorage.getItem('loggedInDoctorName');
+
+    if (!loggedInDoctorId || !loggedInDoctorName) {
+      // Redirect to login if doctor is not logged in
+     
+    } else {
+      // Display doctor's name
+      document.body.insertAdjacentHTML('afterbegin', '<p class="text-center">Welcome, Dr. ' + loggedInDoctorName + '</p>');
+    }
+
+    // Function to display appointment requests for the logged-in doctor
+    function displayAppointments() {
+      var appointmentList = document.getElementById('appointmentList');
+      appointmentList.innerHTML = ''; // Clear previous content
+
+      // Retrieve appointment requests for the logged-in doctor from local storage
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key.startsWith('appointment_')) {
+          var appointment = JSON.parse(localStorage.getItem(key));
+          if (appointment.doctorId === loggedInDoctorId) {
+            // Display appointment request
+            var card = document.createElement('div');
+            card.classList.add('card', 'appointment-card');
+            card.innerHTML = '<div class="card-body">' +
+                                '<h5 class="card-title">Appointment Request</h5>' +
+                                '<p><strong>Date:</strong> ' + appointment.date + '</p>' +
+                                '<p><strong>Description:</strong> ' + appointment.description + '</p>' +
+                                '<button class="btn btn-success mr-2" onclick="acceptAppointment(\'' + key + '\')">Accept</button>' +
+                                '<button class="btn btn-danger" onclick="rejectAppointment(\'' + key + '\')">Reject</button>' +
+                              '</div>';
+            appointmentList.appendChild(card);
+          }
+        }
+      }
+    }
+
+    // Function to accept appointment
+    function acceptAppointment(key) {
+      // Add your logic here for accepting the appointment
+      // For now, let's just remove the appointment from local storage
+      localStorage.removeItem(key);
+      displayAppointments(); // Update the displayed appointment list
+    }
+
+    // Function to reject appointment
+    function rejectAppointment(key) {
+      // Add your logic here for rejecting the appointment
+      // For now, let's just remove the appointment from local storage
+      localStorage.removeItem(key);
+      displayAppointments(); // Update the displayed appointment list
+    }
+
+    // Initial display of appointment requests
+    displayAppointments();
+  </script>
+</body>
+</html>

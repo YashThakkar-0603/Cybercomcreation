@@ -1,0 +1,125 @@
+<!-- appointment_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mt-5">Book an Appointment</h1>
+    <div class="form-container">
+      <form id="appointmentForm" novalidate>
+        <div class="form-group">
+          <label for="doctor">Select Doctor:</label>
+          <select id="doctor" name="doctor" class="form-control" required>
+            <option value="">Select Doctor</option>
+            <!-- Doctor options will be populated here -->
+          </select>
+          <div class="invalid-feedback">Please select a doctor.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="appointmentDate">Appointment Date:</label>
+          <input type="date" id="appointmentDate" name="appointmentDate" class="form-control" required>
+          <div class="invalid-feedback">Please select an appointment date.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" class="form-control" required></textarea>
+          <div class="invalid-feedback">Please provide a description.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (optional, for certain features like dropdowns, modals, etc.) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Populate dropdown list with registered doctors
+    var doctorDropdown = document.getElementById('doctor');
+  
+    for (var i = 0; i < localStorage.length; i++) {
+      var user = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      // Check if the user is registered as a doctor
+      if (user && user.loginType === 'doctor') {
+        var option = document.createElement('option');
+        option.text = user.username;
+        option.value = user.id; // You may want to use the doctor's ID as the value
+        doctorDropdown.add(option);
+      }
+    }
+  
+    // Form submission event listener
+    document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Additional validation to check for blank spaces
+      var appointmentDate = document.getElementById('appointmentDate').value.trim();
+      var description = document.getElementById('description').value.trim();
+  
+      if (doctorDropdown.value === '' || appointmentDate === '' || description === '') {
+        alert('Please fill in all fields.');
+        return;
+      }
+  
+      if (this.checkValidity()) {
+        var selectedDoctorId = doctorDropdown.value;
+  
+        // Save appointment information in local storage for the doctor's dashboard
+        var appointment = {
+          doctorId: selectedDoctorId,
+          date: appointmentDate,
+          description: description
+        };
+  
+        // You can choose your own way to store appointment data, here I'm storing it with a key based on the doctor's ID
+        localStorage.setItem('appointment_' + selectedDoctorId, JSON.stringify(appointment));
+  
+        // Show confirmation message
+        alert('Appointment booked successfully!');
+  
+        // Reset form
+        document.getElementById('appointmentForm').reset();
+  
+        // Redirect to patient dashboard after 1 second
+        setTimeout(function() {
+          window.location.href = 'patient_dashboard.html';
+        }, 1000);
+      } else {
+        // If the form is invalid, show validation errors
+        event.stopPropagation();
+        this.classList.add('was-validated');
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>
